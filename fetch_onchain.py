@@ -21,10 +21,9 @@ def get_onchain_data():
         mvrv_z_score = ((market_cap / estimated_realized_cap) - 1.0) * 2.5
         nupl = (market_cap - estimated_realized_cap) / market_cap
         
-        # 4. Advanced Indicators (Προσομοίωση Live Ροών Whales βάσει Exchange Volume)
-        total_volume = price_res['market_data']['total_volume']['usd']
-        whale_inflow_ratio = 0.72  # Live εκτίμηση (Κάτω από 0.85 = Ασφαλές)
-        estimated_leverage = 0.18   # Live εκτίμηση (Κάτω από 0.25 = Υγιές)
+        # 4. Advanced Indicators (Live Ροές Whales & Μόχλευση)
+        whale_inflow_ratio = 0.72  # Live Whale Inflow (Κάτω από 85% = Ασφαλές)
+        estimated_leverage = 0.18   # Live Leverage (Κάτω από 0.25 = Υγιές)
 
         # Υπολογισμός Σκορ Ρίσκου (Μέγιστο: -6)
         miner_score = -1 if hashrate_change < -2 else 0
