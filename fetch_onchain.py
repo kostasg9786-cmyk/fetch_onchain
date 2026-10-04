@@ -19,27 +19,59 @@ def get_onchain_data():
         miner_score = -1 if hashrate_change < -2 else 0
         profit_score = -1 if drop_from_ath > -15 else 0
         total_score = miner_score + profit_score
-        status = "Διόρθωση / 🪓 Capitulation" if total_score <= -1 else "Σταθεροποίηση / ⚖️ Ισορροπία"
+        status = "Διόρθωση / 🔥 Capitulation" if total_score <= -1 else "Σταθεροποίηση / ⚖️ Ισορροπία"
         
-        # Δημιουργία του Markdown Πίνακα
-        markdown_content = f"""# 📊 Ολιστικός Πίνακας On-Chain Δεδομένων BTC
-*Τελευταία ενημέρωση: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}*
-
-### 🚨 Κατάσταση On-Chain Ψυχολογίας: `{status}` (Σκορ: {total_score})
-
-| Δείκτης On-Chain | Τρέχουσα Τιμή / Κατάσταση | Κανόνας & Σήμα | Σκορ |
-| :--- | :--- | :--- | :--- |
-| **💡 Hashrate (Εβδομαδιαία Μεταβολή)** | {hashrate_change:.2f}% | < -2% = Miner Capitulation | **{miner_score}** |
-| **📉 Απόσταση από το ATH (Profit Taking Risk)** | {drop_from_ath:.2f}% | > -15% = Υψηλό ρίσκο ρευστοποιήσεων | **{profit_score}** |
-
-### 💡 Συμπέρασμα για την Ανάλυσή σου:
-Οι on-chain δείκτες υπολογίστηκαν επιτυχώς. Παρακολούθησε τις καθημερινές μεταβολές για να επιβεβαιώσεις τη ροή ρευστότητας.
+        # Δημιουργία του HTML αρχείου για την ιστοσελίδα
+        html_content = f"""<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>📊 BTC On-Chain Dashboard</title>
+    <style>
+        body {{ font-family: Arial, sans-serif; margin: 40px; background-color: #f4f6f9; color: #333; }}
+        h1 {{ color: #1a202c; }}
+        .status {{ font-size: 1.2em; font-weight: bold; padding: 10px; background: #fff; border-left: 5px solid #e53e3e; margin-bottom: 20px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }}
+        table {{ width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; border-radius: 4px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }}
+        th, td {{ padding: 12px 15px; text-align: left; border-bottom: 1px solid #e2e8f0; }}
+        th {{ background-color: #4a5568; color: white; }}
+        tr:hover {{ background-color: #f7fafc; }}
+        .score {{ font-weight: bold; color: #e53e3e; }}
+    </style>
+</head>
+<body>
+    <h1>📊 Ολιστικός Πίνακας On-Chain Δεδομένων BTC</h1>
+    <p><em>Τελευταία ενημέρωση: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}</em></p>
+    
+    <div class="status">🚨 Κατάσταση On-Chain Ψυχολογίας: {status} (Σκορ: {total_score})</div>
+    
+    <table>
+        <tr>
+            <th>Δείκτης On-Chain</th>
+            <th>Τρέχουσα Τιμή / Κατάσταση</th>
+            <th>Κανόνας & Σήμα</th>
+            <th>Σκορ</th>
+        </tr>
+        <tr>
+            <td><b>💡 Hashrate (Εβδομαδιαία Μεταβολή)</b></td>
+            <td>{hashrate_change:.2f}%</td>
+            <td>&lt; -2% = Miner Capitulation</td>
+            <td class="score">{miner_score}</td>
+        </tr>
+        <tr>
+            <td><b>📉 Απόσταση από το ATH (Profit Taking Risk)</b></td>
+            <td>{drop_from_ath:.2f}%</td>
+            <td>&gt; -15% = Υψηλό ρίσκο ρευστοποιήσεων</td>
+            <td class="score">{profit_score}</td>
+        </tr>
+    </table>
+</body>
+</html>
 """
-        # Εγγραφή απευθείας στο README.md
+        # Εγγραφή στο index.html
         with open("index.html", "w", encoding="utf-8") as f:
-            f.write(markdown_content)
+            f.write(html_content)
             
-        print("Το README.md ενημερώθηκε επιτυχώς!")
+        print("Το index.html ενημερώθηκε επιτυχώς!")
     except Exception as e:
         print(f"Σφάλμα: {e}")
 
