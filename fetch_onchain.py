@@ -28,8 +28,8 @@ def get_onchain_data():
         nupl = (market_cap - estimated_realized_cap) / market_cap
         
         # Κόστος Βάσης (Realized Prices)
-        sth_realized_price = current_price * 0.88  # Εκτίμηση Short-Term Holder Cost Basis (~$74,500)
-        lth_realized_price = current_price * 0.48  # Εκτίμηση Long-Term Holder Cost Basis (~$40,500)
+        sth_realized_price = current_price * 0.88  # Εκτίμηση Short-Term Holder Cost Basis
+        lth_realized_price = current_price * 0.48  # Εκτίμηση Long-Term Holder Cost Basis
         
         # Advanced Κατηγορίες (Whales, Παράγωγα, HODLers)
         whale_inflow_ratio = 0.74
@@ -37,7 +37,7 @@ def get_onchain_data():
         estimated_leverage_ratio = 0.19
         futures_long_short_ratio = 1.05
         rhodl_ratio = 1450 # Δείκτης κυκλικής κορυφής
-        cdd_score = 0.25 # Coin Days Destroyed (Whales de-risking)
+        cdd_score = 0.25 # Coin Days Destroyed
 
         # Υπολογισμός Συνολικού Σκορ Ρίσκου (Μέγιστο: -12)
         scores = {
@@ -63,7 +63,7 @@ def get_onchain_data():
         else:
             status = "⚖️ Ισορροπία / Σταθεροποίηση"
         
-        # Δημιουργία της πλήρους Pro HTML Ιστοσελίδας
+        # Δημιουργία της πλήρους HTML Ιστοσελίδας
         html_content = f"""<!DOCTYPE html>
 <html>
 <head>
@@ -78,10 +78,10 @@ def get_onchain_data():
         th, td {{ padding: 12px 16px; text-align: left; border-bottom: 1px solid #e2e8f0; }}
         th {{ background-color: #2d3748; color: white; }}
         tr:hover {{ background-color: #f7fafc; }}
-        .score {{ font-weight: bold; }}
-        .bearish {{ color: #e53e3e; }}
-        .bullish {{ color: #38a169; }}
-        .neutral {{ color: #718096; }}
+        .score {{ font-weight: bold; color: #718096; }}
+        .bearish {{ color: #e53e3e; font-weight: bold; }}
+        .bullish {{ color: #38a169; font-weight: bold; }}
+        .neutral {{ color: #718096; font-weight: bold; }}
     </style>
 </head>
 <body>
@@ -106,7 +106,7 @@ def get_onchain_data():
         <tr><td><b>🔄 Realized HODL Ratio (RHODL)</b></td><td>{rhodl_ratio}</td><td>&gt; 3000 = Μεταφορά από Whales σε Retail (Τοπική Κορυφή)</td><td class="score">{scores['rhodl']}</td></tr>
     </table>
 
-    <h2>3. Ροές Whales & Δραστηριότητα Δικτύου ( Selling Pressure & Demand)</h2>
+    <h2>3. Ροές Whales & Δραστηριότητα Δικτύου (Selling Pressure & Demand)</h2>
     <table>
         <tr><th>Δείκτης On-Chain</th><th>Live Μέτρηση</th><th>Κανόνας & Σήμα</th><th>Σκορ</th></tr>
         <tr><td><b>🐋 Whale Exchange Inflow Ratio</b></td><td>{(whale_inflow_ratio * 100):.1f}%</td><td>&gt; 85% = Οι Whales καταθέτουν στα ανταλλακτήρια για πώληση</td><td class="score">{scores['whale']}</td></tr>
@@ -116,7 +116,7 @@ def get_onchain_data():
         <tr><td><b>👥 Active Addresses (Δραστηριότητα)</b></td><td>{addresses_change:.2f}%</td><td>&lt; -5% = Έλλειψη ενδιαφέροντος και νέων αγοραστών</td><td class="score">{scores['network']}</td></tr>
     </table>
 
-    <h2>4. Μόχλευση & Αγορά Παραγώγων ( Futures Risk)</h2>
+    <h2>4. Μόχλευση & Αγορά Παραγώγων (Futures Risk)</h2>
     <table>
         <tr><th>Δείκτης On-Chain</th><th>Live Μέτρηση</th><th>Κανόνας & Σήμα</th><th>Σκορ</th></tr>
         <tr><td><b>⚙️ Estimated Leverage Ratio</b></td><td>{estimated_leverage_ratio:.2f}</td><td>&gt; 0.25 = Υπερβολική Μόχλευση (Κίνδυνος Long Squeeze)</td><td class="score">{scores['leverage']}</td></tr>
@@ -128,6 +128,14 @@ def get_onchain_data():
         with open("index.html", "w", encoding="utf-8") as f:
             f.write(html_content)
         print("Το Ολιστικό Dashboard ενημερώθηκε με επιτυχία!")
+        
+        # 🔔 ΑΥΤΟΜΑΤΟ ΚΑΜΠΑΝΑΚΙ ΓΙΑ EMAIL
+        # Αν το σκορ δείξει ρίσκο (Short) ή ακραία ευκαιρία (Long), βγάζει σήμα
+        if total_score <= -3:
+            raise ValueError(f"🚨 ΣΗΜΑ SHORT: Η αγορά είναι υπερθερμασμένη! Σκορ: {total_score}. Μπες για ανάλυση: https://github.io")
+        elif total_score >= 2:
+            raise ValueError(f"🟢 ΣΗΜΑ LONG: Η αγορά έπιασε πυθμένα! Σκορ: {total_score}. Μπες για ανάλυση: https://github.io")
+            
     except Exception as e:
         print(f"Σφάλμα: {e}")
 
