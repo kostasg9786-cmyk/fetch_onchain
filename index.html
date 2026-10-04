@@ -2,41 +2,53 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>📊 BTC On-Chain Dashboard</title>
+    <title>📊 Advanced BTC On-Chain Dashboard</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f6f9; color: #333; }
-        h1 { color: #1a202c; }
-        .status { font-size: 1.2em; font-weight: bold; padding: 10px; background: #fff; border-left: 5px solid #e53e3e; margin-bottom: 20px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; border-radius: 4px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #e2e8f0; }
-        th { background-color: #4a5568; color: white; }}
+        h1 { color: #1a202c; border-bottom: 2px solid #cbd5e1; padding-bottom: 10px; }
+        .status { font-size: 1.3em; font-weight: bold; padding: 15px; background: #fff; border-left: 6px solid #3182ce; margin-bottom: 25px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 4px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        th { background-color: #2d3748; color: white; }
         tr:hover { background-color: #f7fafc; }
-        .score { font-weight: bold; color: #e53e3e; }
+        .score { font-weight: bold; color: #718096; }
     </style>
 </head>
 <body>
-    <h1>📊 Ολιστικός Πίνακας On-Chain Δεδομένων BTC</h1>
-    <p><em>Τελευταία ενημέρωση: 04/10/2026 12:15:00</em></p>
+    <h1>📊 Ολιστικό On-Chain Dashboard για το Bitcoin</h1>
+    <p><em>Τελευταία live ενημέρωση: 04/10/2026 12:24:00</em></p>
     
-    <div class="status">🚨 Κατάσταση On-Chain Ψυχολογίας: Σταθεροποίηση / ⚖️ Ισορροπία (Σκορ: 0)</div>
+    <div class="status">Ψυχολογία Αγοράς: ⚖️ Ισορροπία / Σταθεροποίηση (Συνολικό Σκορ Ρίσκου: 0)</div>
     
     <table>
         <tr>
             <th>Δείκτης On-Chain</th>
-            <th>Τρέχουσα Τιμή / Κατάσταση</th>
-            <th>Κανόνας & Σήμα</th>
-            <th>Σκορ</th>
+            <th>Live Μέτρηση / Κατάσταση</th>
+            <th>Κριτήριο & Σήμα</th>
+            <th>Σκορ Ρίσκου</th>
         </tr>
         <tr>
             <td><b>💡 Hashrate (Εβδομαδιαία Μεταβολή)</b></td>
             <td>+1.45%</td>
-            <td>&lt; -2% = Miner Capitulation</td>
+            <td>&lt; -2% = Miner Capitulation (Πίεση Πώλησης)</td>
             <td class="score">0</td>
         </tr>
         <tr>
-            <td><b>📉 Απόσταση από το ATH (Profit Taking Risk)</b></td>
+            <td><b>📉 Απόσταση από το ATH</b></td>
             <td>-32.68%</td>
-            <td>&gt; -15% = Υψηλό ρίσκο ρευστοποιήσεων</td>
+            <td>&gt; -15% = Υψηλό ρίσκο Profit Taking από Whales</td>
+            <td class="score">0</td>
+        </tr>
+        <tr>
+            <td><b>📈 MVRV Z-Score (Υπερτίμηση)</b></td>
+            <td>1.35</td>
+            <td>&gt; 2.50 = Υπερθερμασμένη αγορά (Κοντά σε κορυφή)</td>
+            <td class="score">0</td>
+        </tr>
+        <tr>
+            <td><b>📊 NUPL (Μη Πραγματοποιηθέντα Κέρδη)</b></td>
+            <td>0.35</td>
+            <td>&gt; 0.50 = "Belief / Euphoria" (Έτοιμοι για πώληση)</td>
             <td class="score">0</td>
         </tr>
     </table>
