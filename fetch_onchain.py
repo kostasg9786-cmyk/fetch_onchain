@@ -19,7 +19,7 @@ def get_onchain_data():
         miner_score = -1 if hashrate_change < -2 else 0
         profit_score = -1 if drop_from_ath > -15 else 0
         total_score = miner_score + profit_score
-        status = "Διόρθωση / 🔥 Capitulation" if total_score <= -1 else "Σταθεροποίηση / ⚖️ Ισορροπία"
+        status = "Διόρθωση / 🪓 Capitulation" if total_score <= -1 else "Σταθεροποίηση / ⚖️ Ισορροπία"
         
         # Δημιουργία του HTML αρχείου για την ιστοσελίδα
         html_content = f"""<!DOCTYPE html>
@@ -67,7 +67,7 @@ def get_onchain_data():
 </body>
 </html>
 """
-        # Εγγραφή στο index.html
+        # Εγγραφή απευθείας στο index.html
         with open("index.html", "w", encoding="utf-8") as f:
             f.write(html_content)
             
