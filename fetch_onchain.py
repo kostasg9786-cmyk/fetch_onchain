@@ -36,7 +36,7 @@ def get_onchain_data():
 Οι on-chain δείκτες υπολογίστηκαν επιτυχώς. Παρακολούθησε τις καθημερινές μεταβολές για να επιβεβαιώσεις τη ροή ρευστότητας.
 """
         # Εγγραφή απευθείας στο README.md
-        with open("README.md", "w", encoding="utf-8") as f:
+        with open("index.html", "w", encoding="utf-8") as f:
             f.write(markdown_content)
             
         print("Το README.md ενημερώθηκε επιτυχώς!")
